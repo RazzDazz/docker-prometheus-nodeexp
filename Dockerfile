@@ -3,9 +3,9 @@ MAINTAINER RazzDazz
 # Using instructions from
 # https://www.digitalocean.com/community/tutorials/how-to-install-prometheus-on-ubuntu-16-04
 
-ENV NODE_EXPORTER_VER v0.15.1
-ENV NODE_EXPORTER_TAR node_exporter-0.15.1.linux-amd64.tar.gz
-ENV NODE_EXPORTER_TAR_FOLDER node_exporter-0.15.1.linux-amd64
+ENV NODE_EXPORTER_VER v0.17.0
+ENV NODE_EXPORTER_TAR node_exporter-0.17.0.linux-amd64.tar.gz
+ENV NODE_EXPORTER_TAR_FOLDER node_exporter-0.17.0.linux-amd64
 
 # Create User
 RUN useradd --no-create-home --shell /bin/false node_exporter
