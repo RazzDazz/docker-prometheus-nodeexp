@@ -13,7 +13,7 @@ RUN useradd --no-create-home --shell /bin/false node_exporter
 # Download and extract Node Exporter
 RUN mkdir -p /tmp/nodeexporter && \
     cd /tmp/nodeexporter/ && \
-    curl -LO https://github.com/prometheus/node_exporter/releases/download/{NODE_EXPORTER_VER}/{NODE_EXPORTER_TAR} && \
+    curl -LO https://github.com/prometheus/node_exporter/releases/download/${NODE_EXPORTER_VER}/${NODE_EXPORTER_TAR} && \
     tar xvf ${NODE_EXPORTER_TAR} && \
     cp ${NODE_EXPORTER_TAR_FOLDER}/node_exporter /usr/local/bin/ && \
     rm -rf /tmp/nodeexporter
