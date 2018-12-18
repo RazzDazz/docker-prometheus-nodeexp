@@ -20,3 +20,12 @@ RUN mkdir -p /tmp/nodeexporter && \
 
 # Set User Rights
 sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
+
+# Copy helper scripts into container
+COPY docker-entrypoint.sh /tmp/
+RUN chmod 777 /tmp/docker-entrypoint.sh
+COPY supervisor_prometheus_nodeexp.conf /tmp/
+             
+# Start prometheus using supervisor
+VOLUME /var/logs/supervisor
+CMD ["/tmp/docker-entrypoint.sh"]
