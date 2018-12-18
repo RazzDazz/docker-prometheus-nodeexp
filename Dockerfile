@@ -19,7 +19,7 @@ RUN mkdir -p /tmp/nodeexporter && \
     rm -rf /tmp/nodeexporter
 
 # Set User Rights
-sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
+RUN chown node_exporter:node_exporter /usr/local/bin/node_exporter
 
 # Copy helper scripts into container
 COPY docker-entrypoint.sh /tmp/
