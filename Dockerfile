@@ -3,6 +3,8 @@ MAINTAINER RazzDazz
 # Using instructions from
 # https://www.digitalocean.com/community/tutorials/how-to-install-prometheus-on-ubuntu-16-04
 
+
+ENV REFRESHED_AT 2019-01-05
 ENV NODE_EXPORTER_VER v0.17.0
 ENV NODE_EXPORTER_TAR node_exporter-0.17.0.linux-amd64.tar.gz
 ENV NODE_EXPORTER_TAR_FOLDER node_exporter-0.17.0.linux-amd64
@@ -23,6 +25,11 @@ COPY docker-entrypoint.sh /tmp/
 RUN chmod 777 /tmp/docker-entrypoint.sh
 COPY supervisor_prometheus_nodeexp.conf /tmp/
              
-# Start prometheus using supervisor
-VOLUME /var/logs/supervisor
+#
+EXPOSE 9090
+
+VOLUME /var/log/supervisor
+VOLUME /var/lib/prometheus
+VOLUME /opt/prometheus
+
 CMD ["/tmp/docker-entrypoint.sh"]
