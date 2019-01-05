@@ -15,6 +15,9 @@ RUN mkdir -p /tmp/nodeexporter && \
     cp ${NODE_EXPORTER_TAR_FOLDER}/node_exporter /usr/local/bin/ && \
     rm -rf /tmp/nodeexporter
 
+# Copy prometheus.yml into container
+COPY prometheus.yml /tmp/prometheus.yml.sample
+
 # Copy helper scripts into container
 COPY docker-entrypoint.sh /tmp/
 RUN chmod 777 /tmp/docker-entrypoint.sh
