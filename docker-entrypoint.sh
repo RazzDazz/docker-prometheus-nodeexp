@@ -1,4 +1,3 @@
-
 #!/bin/bash
 if [ ! -f "/opt/prometheus/prometheus.yml" ] 
 then
