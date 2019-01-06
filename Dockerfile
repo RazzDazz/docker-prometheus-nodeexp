@@ -1,14 +1,13 @@
-FROM razzle/docker-prometheus:latest
+FROM razzle/docker-prometheus:0.1
 MAINTAINER RazzDazz
 # Using instructions from
 # https://www.digitalocean.com/community/tutorials/how-to-install-prometheus-on-ubuntu-16-04
 
+
+ENV REFRESHED_AT 2019-01-05
 ENV NODE_EXPORTER_VER v0.17.0
 ENV NODE_EXPORTER_TAR node_exporter-0.17.0.linux-amd64.tar.gz
 ENV NODE_EXPORTER_TAR_FOLDER node_exporter-0.17.0.linux-amd64
-
-# Create User
-RUN useradd --no-create-home --shell /bin/false node_exporter
 
 # Download and extract Node Exporter
 RUN mkdir -p /tmp/nodeexporter && \
@@ -18,14 +17,19 @@ RUN mkdir -p /tmp/nodeexporter && \
     cp ${NODE_EXPORTER_TAR_FOLDER}/node_exporter /usr/local/bin/ && \
     rm -rf /tmp/nodeexporter
 
-# Set User Rights
-RUN chown node_exporter:node_exporter /usr/local/bin/node_exporter
+# Copy prometheus.yml into container
+COPY prometheus.yml /tmp/prometheus.yml.sample
 
 # Copy helper scripts into container
 COPY docker-entrypoint.sh /tmp/
 RUN chmod 777 /tmp/docker-entrypoint.sh
 COPY supervisor_prometheus_nodeexp.conf /tmp/
              
-# Start prometheus using supervisor
-VOLUME /var/logs/supervisor
+#
+EXPOSE 9090
+
+VOLUME /var/log/supervisor
+VOLUME /var/lib/prometheus
+VOLUME /opt/prometheus
+
 CMD ["/tmp/docker-entrypoint.sh"]
